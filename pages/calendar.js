@@ -1,38 +1,40 @@
 import Layout from '../components/layout'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import resourceTimelinePlugin from '@fullcalendar/resource-timeline'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import listPlugin from '@fullcalendar/list'
+import interactionPlugin from '@fullcalendar/interaction'
 
 export default function CalendarPage() {
   return (
     <Layout>
-      <div className='calendar-container'>
+      <div className='w-full max-w-7xl mx-auto h-[90vh] flex flex-col'>
         <FullCalendar
           plugins={[
-            resourceTimelinePlugin,
             dayGridPlugin,
+            timeGridPlugin,
+            listPlugin,
             interactionPlugin,
-            timeGridPlugin
           ]}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: 'resourceTimelineWeek,dayGridMonth,timeGridWeek'
+            right: 'dayGridMonth,timeGridWeek,listWeek',
           }}
-          initialView='resourceTimelineWeek'
+          initialView='dayGridMonth'
+          height='100%'
           nowIndicator={true}
           editable={true}
           selectable={true}
           selectMirror={true}
-          resources={[
-            { id: 'a', title: 'Auditorium A' },
-            { id: 'b', title: 'Auditorium B', eventColor: 'green' },
-            { id: 'c', title: 'Auditorium C', eventColor: 'orange' },
-          ]}
           initialEvents={[
-            { title: 'nice event', start: new Date(), resourceId: 'a' }
+            { title: 'an event', start: new Date(), resourceId: 'a' },
+            {
+              title: 'another event',
+              start: new Date('5-10-2023'),
+              end: new Date('5-12-2023'),
+              resourceId: 'b',
+            },
           ]}
         />
       </div>
